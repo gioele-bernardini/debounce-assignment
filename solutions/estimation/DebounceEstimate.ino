@@ -1,19 +1,21 @@
 const int buttonPin = 2;
+const int ledPin = 13;
 
 int buttonState = 0;
 int lastButtonState = 0;
-int validPressCount = 0;
-int debounceDetected = 0;
+int buttonPressCount = 0;
 
-// Variables for binary search
-unsigned long debounceDelayMin = 1;
-unsigned long debounceDelayMax = 50; // Set this to a reasonable upper bound
-unsigned long debounceDelay = (debounceDelayMin + debounceDelayMax) / 2;
+// Required for the Toggle mode
+int ledState = LOW;
+
+// Variables for debounce detection
 unsigned long lastDebounceTime = 0;
-unsigned long lastPressTime = 0;
-const int requiredValidPresses = 10;
+unsigned long debounceDelay = 5; // Initial debounce delay
+bool debounceDetected = false;
+int debounceCount = 0;
 
 void setup() {
+  pinMode(ledPin, OUTPUT);
   pinMode(buttonPin, INPUT);
   Serial.begin(9600);
 }
@@ -24,39 +26,28 @@ void loop() {
 
   // Check for state change
   if (buttonState != lastButtonState) {
+    // Detect debounce
     if ((currentTime - lastDebounceTime) < debounceDelay) {
-      debounceDetected++;
-      validPressCount = 0; // Reset the count if a debounce is detected
-
-      // Update debounceDelayMax
-      debounceDelayMin = debounceDelay + 1;
-      debounceDelay = (debounceDelayMin + debounceDelayMax) / 2;
+      if (!debounceDetected) {
+        debounceCount++;
+        debounceDetected = true;
+        Serial.print("Debounce Detected: ");
+        Serial.println(debounceCount);
+      }
     } else {
+      debounceDetected = false;
       lastDebounceTime = currentTime;
 
       if (buttonState == HIGH) {
-        if (debounceDetected == 0) {
-          validPressCount++;
-          Serial.print("Valid Press Count: ");
-          Serial.println(validPressCount);
+        buttonPressCount++;
+        Serial.print("Button Press Count: ");
+        Serial.println(buttonPressCount);
 
-          if (validPressCount >= requiredValidPresses) {
-            // Update debounceDelayMax
-            debounceDelayMax = debounceDelay;
-            debounceDelay = (debounceDelayMin + debounceDelayMax) / 2;
-            validPressCount = 0; // Reset the count after updating the delay
-          }
-        } else {
-          debounceDetected = 0;
-        }
-
-        lastPressTime = currentTime;
+        ledState = !ledState;
+        digitalWrite(ledPin, ledState);
       }
+
+      lastButtonState = buttonState;
     }
-
-    Serial.print("Current debounceDelay: ");
-    Serial.println(debounceDelay);
-
-    lastButtonState = buttonState;
   }
 }
