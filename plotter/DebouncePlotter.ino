@@ -11,13 +11,10 @@
 
 const int buttonPin = 2;
 const int ledPin = 13;
-// The debounce time in milliseconds to prevent immediate state changes
-const unsigned long debounceDelay = 50;
 
 int buttonPressCount = 0; // Counter for button presses
-int buttonState = 0;      // Current debounced button state
-int lastButtonState = 0;  // Last debounced button state
-unsigned long lastDebounceTime = 0; // Last time the button state changed
+int buttonState = 0;      // Current button state
+int lastButtonState = 0;  // Last button state
 
 int ledState = LOW;
 
@@ -32,22 +29,15 @@ void setup() {
 void loop() {
   int reading = digitalRead(buttonPin);
 
-  // Check if the debounce period has not passed
+  // Update the button state if it has changed
   if (reading != lastButtonState) {
-    lastDebounceTime = millis();
-  }
+    buttonState = reading;
+    
+    // Send the button state to the Serial Monitor for the plotter
+    Serial.print(buttonState);
 
-  if ((millis() - lastDebounceTime) > debounceDelay) {
-    // Update the button state if the debounce period has passed
-    if (reading != buttonState) {
-      buttonState = reading;
-
-      // Send the button state to the Serial Monitor for the plotter
-      Serial.print(buttonState);
-
-      // Handle button press
-      handleLED(CURRENT_MODE, buttonState);
-    }
+    // Handle button press
+    handleLED(CURRENT_MODE, buttonState);
   }
 
   lastButtonState = reading;
