@@ -1,3 +1,32 @@
+/*
+  Project: Button Debounce Auto-configurator
+  Description: This program interfaces with an Arduino to automatically configure the debounce delay for
+               a button using a binary search algorithm. The program measures the time between button
+               press transitions to determine the optimal debounce delay.
+
+  Motivation: This prototype was created to automate the configuration of debounce delay, ensuring accurate
+              detection of button presses without the need for manual calibration.
+
+  Functionality:
+    - Reads button state changes and measures time intervals between transitions.
+    - Uses a binary search algorithm to adjust the debounce delay based on detected double transitions.
+    - Updates debounce delay only when necessary, ensuring it is sufficiently long to cover actual debounces.
+
+  Usage:
+    - The user presses the button in a consistent pattern (holding for 0.5 seconds and releasing for 0.5 seconds).
+    - The program automatically adjusts the debounce delay to handle double transitions properly.
+
+  Serial Port Configuration:
+    - Baud rate: 9600
+
+  Note: This is a prototype and may require further refinements for production use. The current logic demonstrates
+        the core concept of auto-configuring the debounce delay but has not been fully tested due to research
+        thesis time constraints.
+
+  Author: [Gioele Bernardini]
+  Date: [16/07/2024]
+*/
+
 const int buttonPin = 2;
 
 int buttonState = 0;
