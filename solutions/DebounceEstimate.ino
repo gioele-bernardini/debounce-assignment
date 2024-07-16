@@ -1,3 +1,0 @@
-/*
-This programs automatically detects the debounce estimation for the button in my own personal circuit.
-*/
