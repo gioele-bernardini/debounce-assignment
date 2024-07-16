@@ -125,8 +125,12 @@ int main() {
 
     // Print states '1' - upper line
     for (int i = 0; i < N_COLUMNS; i++) {
-      if (plot[i] == 1)
-        cout << '_';
+      if (plot[i] == 1) {
+        if (i < N_COLUMNS - 1 && plot[i] != plot[i + 1] && plot[i + 1] == 0)
+          cout << ' ';
+        else
+          cout << '_';
+      }
       else
         cout << ' ';
     }
@@ -145,9 +149,12 @@ int main() {
 
     // Print states '0' - lower line
     for (int i = 0; i < N_COLUMNS; i++) {
-      if (plot[i] == 0)
-        cout << '_';
-      else
+      if (plot[i] == 0) {
+        if (i < N_COLUMNS - 1 && plot[i] != plot[i + 1] && plot[i + 1] == 1)
+          cout << ' ';
+        else
+          cout << '_';
+      } else
         cout << ' ';
     }
     cout << endl;
