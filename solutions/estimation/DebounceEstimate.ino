@@ -22,35 +22,32 @@ void setup() {
 
 void loop() {
   buttonState = digitalRead(buttonPin);
+  unsigned long currentTime = millis();
 
   // Check for state change
   if (buttonState != lastButtonState) {
-    unsigned long currentTime = millis();
-    
     // Detect debounce
-    if ((currentTime - lastDebounceTime) < debounceDelay && !debounceDetected) {
-      debounceCount++;
-      debounceDetected = true;
-      Serial.print("Debounce Detected: ");
-      Serial.println(debounceCount);
-    }
-    
-    if ((currentTime - lastDebounceTime) >= debounceDelay) {
+    if ((currentTime - lastDebounceTime) < debounceDelay) {
+      if (!debounceDetected) {
+        debounceCount++;
+        debounceDetected = true;
+        Serial.print("Debounce Detected: ");
+        Serial.println(debounceCount);
+      }
+    } else {
       debounceDetected = false;
-    }
-    
-    lastDebounceTime = currentTime;
-    
-    if (buttonState == HIGH) {
-      buttonPressCount++;
-      Serial.print("Button Press Count: ");
-      Serial.println(buttonPressCount);
+      lastDebounceTime = currentTime;
 
-      ledState = !ledState;
-      digitalWrite(ledPin, ledState);
-    }
+      if (buttonState == HIGH) {
+        buttonPressCount++;
+        Serial.print("Button Press Count: ");
+        Serial.println(buttonPressCount);
 
-    lastButtonState = buttonState;
+        ledState = !ledState;
+        digitalWrite(ledPin, ledState);
+      }
+
+      lastButtonState = buttonState;
+    }
   }
 }
-
