@@ -1,0 +1,43 @@
+allora, idea iniziale parto da un ciclo, pulsante e' non premuto
+
+il pulsante viene premmuto
+viene rilevata una transizione
+
+ASPETTO imposto questa transizione (ovvio incremento il pulsante)
+nuovo ciclo
+
+ipotizziamo il debounce e quindi rilevo una nuova transizione
+se la distanza tra queste due transizione e' < di 0.5 
+sono di fronte a una transizione doppia!
+
+NON INCREMENTO IL CONTATORE MA INCREMENTO IL CONTATORE debounce
+
+
+
+
+
+ora, come sistemo questo delay? cosa c'entra intanto questo delay?
+
+idealmente, il dealy deve essere abbastanza grande da coprire due transizioni.
+ho rilevato che le due transizioni ci sono, ma devo prevedere che il dealy le copra quindi
+
+
+
+SE DUE TRANSIZIONI SI VERIFICANO PRIMA DI 0.5 SECONDI MA LORO SONO DISTANTI PIU' DI DELAY => DELAY E' TROPPO CORTO E VA AUMENTATO
+
+
+QUINDI NEL CHECK INIZIALE QUANDO RILEVO UNA TRANSIZIONE DEVO VERIFICARE CHE IL TEMPO DALL'ULTIMA SIA MINORE DI 0.5, MA MAGGIORE DI DELAY
+
+IN QUESTO CASO ALLORA AUMENTO DELAY - SEGNO LA TRANSIZIONE COME DEBOUNCE E VIA!
+
+
+int loop() {
+  leggo valore;
+
+  if (valore != vecchioValore) {
+    qui sono nuova transizione
+    if (tempo tra ora e vecchia transizione < 0.5 ma > delay ) {
+      // aumento delay
+    }
+  }
+}
