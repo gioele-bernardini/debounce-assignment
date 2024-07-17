@@ -14,7 +14,7 @@
     - Automatically optimize the debounce time for a button, avoiding the need for manual adjustments.
 
   Prototype Note:
-    - This code is a prototype and an embryonic version developed as part of my thesis. Due to time constraints,
+    - This code is a prototype and an embryonic version. Due to time constraints for my thesis,
       it has only been sketched out and may require further improvements and refinements.
 
   Author: Gioele Bernardini
