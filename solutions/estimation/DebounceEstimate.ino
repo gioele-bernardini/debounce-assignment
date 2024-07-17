@@ -1,3 +1,26 @@
+/*
+  Project: Button Debounce Optimizer
+  Description: This program implements a debounce system for a button, automatically adjusting the debounce
+               time to minimize erroneous readings. The program uses two variables to track the current and
+               previous state of the button, as well as a timer for debounce.
+
+  Functionality:
+    - When a change in the button state is detected, it checks if it is a bounce or an actual action.
+    - If a bounce is detected, the program increments the debounce time.
+    - If no bounces are detected for a certain number of iterations, the program decrements the debounce time.
+    - The debounce time is automatically adjusted until an optimal value is found.
+
+  Motivation:
+    - Automatically optimize the debounce time for a button, avoiding the need for manual adjustments.
+
+  Prototype Note:
+    - This code is a prototype and an embryonic version developed as part of my thesis. Due to time constraints,
+      it has only been sketched out and may require further improvements and refinements.
+
+  Author: Gioele Bernardini
+  Date: 16/07/2024
+*/
+
 #define buttonPin 2
 #define ledPin 13
 #define TWEAK_ACCURACY 100
@@ -107,6 +130,6 @@ int checkDelay() {
   if ((maxDebounceDelay - minDebounceDelay) <= TWEAK_ACCURACY)
     return 1;
   else
-    return 0;  // aggiungiamo un return 0 qui
+    return 0;
 }
 
