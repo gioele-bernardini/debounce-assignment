@@ -49,7 +49,8 @@ This repository contains the source code for the Debounce Assignment, completed 
 
 ### Alternative Debounce Algorithm
 
-There is an additional branch named `estimate-dev` where an alternative algorithm for `DebounceEstimate.ino` has been implemented. To explore this alternative implementation, you can check out the branch using the following commands:
+There is an additional branch named `estimate-dev` where an alternative algorithm for `DebounceEstimate.ino` has been tested. Due to time costraints it is *not* fully working, but it might be a good starting point for what will come next.
+To explore this alternative implementation, you can check out the branch using the following commands:
 
 ```sh
 git checkout estimate-dev
