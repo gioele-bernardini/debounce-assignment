@@ -20,7 +20,7 @@
   - Might not detect false triggers caused by quick fluctuations shorter than the debounce period.
 
   Additional Notes:
-  This solution is suited for systems requiring immediate feedback upon button press, with added functionality of counting debounces and button presses for better insight and debugging.
+  This solution is suited for systems requiring immediate feedback upon button press, with added functionality of counting debounces and button presses for better insight and debugging. This solution may require improvements. 
 
   Usage for Estimating Debounce Delay:
   - Upload the program to your microcontroller and open the serial monitor at 9600 baud rate.
