@@ -1,5 +1,6 @@
 /*
   Project: Button Debounce Optimizer
+
   Description: This program implements a debounce system for a button, automatically adjusting the debounce
                time to minimize erroneous readings. The program uses two variables to track the current and
                previous state of the button, as well as a timer for debounce.
